@@ -1,18 +1,34 @@
 'use client';
 import { FaMoon } from 'react-icons/fa';
 import Image from 'next/image';
-import {  useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const captchaRef = useRef(null);
 
   useEffect(() => {
-    // Simulate an artificial delay to showcase the loader
+    
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
 
     return () => clearTimeout(timer);
+  }, []);
+
+  const handleFormSubmit = () => {
+    // submition form here !
+  }
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?render=6LdAIB0mAAAAAJkoDf1D1eaYMKjc_aKV2kOINaA7"; 
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
 
   if (loading) {
@@ -31,7 +47,7 @@ export default function Home() {
           <FaMoon size={20} color="white" />
         </button>
       </div>
-      
+
       {/* Left side */}
       <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-6 sm:p-12 bg-gray-900">
         {/* Left side content */}
@@ -56,8 +72,11 @@ export default function Home() {
               </label>
               <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500" id="password" type="password" placeholder="******************" />
             </div>
+            <div className="mb-4">
+              <div id="captcha" ref={captchaRef} />
+            </div>
             <div className="mb-6">
-              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">
+              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button" onClick={handleFormSubmit}>
                 Sign In
               </button>
             </div>
@@ -66,8 +85,10 @@ export default function Home() {
                 Forgot Password?
               </a>
               <p className="text-gray-400 mt-4">
-                Not registered? 
-                <a className="text-blue-500 hover:text-blue-600 mx-1" href="#">Create an account</a>
+                Not registered?
+                <a className="text-blue-500 hover:text-blue-600 mx-1" href="#">
+                  Create an account
+                </a>
               </p>
             </div>
           </form>
