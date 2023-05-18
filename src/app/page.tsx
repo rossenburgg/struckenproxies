@@ -1,7 +1,28 @@
+'use client';
 import { FaMoon } from 'react-icons/fa';
 import Image from 'next/image';
+import {  useState, useEffect } from 'react';
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate an artificial delay to showcase the loader
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-800 text-white">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-500"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-800 text-white sm:flex-row">
       {/* Dark mode toggle icon */}
