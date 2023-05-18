@@ -7,7 +7,7 @@ export default function Home() {
       {/* Dark mode toggle icon */}
       <div className="absolute top-0 right-0 m-4">
         <button className="rounded-full bg-gray-900 hover:bg-gray-700 p-2">
-          <FaMoon size={24} color="white" />
+          <FaMoon size={20} color="white" />
         </button>
       </div>
       
@@ -36,7 +36,7 @@ export default function Home() {
               <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500" id="password" type="password" placeholder="******************" />
             </div>
             <div className="mb-6">
-              <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">
+              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button">
                 Sign In
               </button>
             </div>
@@ -44,6 +44,10 @@ export default function Home() {
               <a className="inline-block align-baseline font-bold text-sm text-gray-400 hover:text-gray-300" href="#">
                 Forgot Password?
               </a>
+              <p className="text-gray-400 mt-4">
+                Not registered? 
+                <a className="text-blue-500 hover:text-blue-600 mx-1" href="#">Create an account</a>
+              </p>
             </div>
           </form>
         </div>
