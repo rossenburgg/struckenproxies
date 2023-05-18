@@ -86,8 +86,10 @@ export default function Home() {
         <div className="w-full max-w-md mx-auto">
           <form
             className={`${
-              darkMode ? 'bg-gray-700' : ''
-            } shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 ${darkMode ? 'text-white' : 'text-gray-800'} ${darkMode ? 'border-0' : 'border border-gray-300'}`}
+              darkMode ? 'bg-gray-700' : 'bg-white'
+            } ${darkMode ? 'shadow-lg' : 'border border-gray-300'} rounded-lg px-8 pt-6 pb-8 mb-4 ${
+              darkMode ? 'text-white' : 'text-gray-800'
+            }`}
           >
             <h2 className="mb-4 text-3xl font-bold text-left">
               Sign In
@@ -112,8 +114,8 @@ export default function Home() {
                 className={`${
                   darkMode
                     ? 'bg-gray-600 border-gray-500 text-gray-300'
-                    : 'bg-white border border-gray-400 text-gray-800'
-                } shadow appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline`}
+                    : 'bg-white border border-gray-300 text-gray-800'
+                } ${darkMode ? 'shadow' : ''} appearance-none rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="email"
                 type="email"
                 placeholder="Email"
@@ -132,8 +134,8 @@ export default function Home() {
                 className={`${
                   darkMode
                     ? 'bg-gray-600 border-gray-500 text-gray-300'
-                    : 'bg-white border border-gray-400 text-gray-800'
-                } shadow appearance-none rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
+                    : 'bg-white border border-gray-300 text-gray-800'
+                } ${darkMode ? 'shadow' : ''} appearance-none rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="password"
                 type="password"
                 placeholder="******************"
