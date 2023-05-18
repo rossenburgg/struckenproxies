@@ -1,14 +1,14 @@
 'use client';
-import { FaMoon } from 'react-icons/fa';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import Image from 'next/image';
 import { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
   const captchaRef = useRef(null);
 
   useEffect(() => {
-    
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -17,12 +17,17 @@ export default function Home() {
   }, []);
 
   const handleFormSubmit = () => {
-    // submition form here !
-  }
+    // Handle form submission logic here
+  };
+
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://www.google.com/recaptcha/api.js?render=6LdAIB0mAAAAAJkoDf1D1eaYMKjc_aKV2kOINaA7"; 
+    const script = document.createElement('script');
+    script.src =
+      'https://www.google.com/recaptcha/api.js?render=6LdAIB0mAAAAAJkoDf1D1eaYMKjc_aKV2kOINaA7';
     script.async = true;
     document.body.appendChild(script);
 
@@ -40,11 +45,22 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-800 text-white sm:flex-row">
+    <div
+      className={`flex flex-col min-h-screen ${
+        darkMode ? 'bg-gray-900' : 'bg-gray-800'
+      } text-white sm:flex-row transition-all duration-500`}
+    >
       {/* Dark mode toggle icon */}
       <div className="absolute top-0 right-0 m-4">
-        <button className="rounded-full bg-gray-900 hover:bg-gray-700 p-2">
-          <FaMoon size={20} color="white" />
+        <button
+          className="rounded-full bg-gray-900 hover:bg-gray-700 p-2"
+          onClick={toggleDarkMode}
+        >
+          {darkMode ? (
+            <FaSun size={20} color="white" />
+          ) : (
+            <FaMoon size={20} color="white" />
+          )}
         </button>
       </div>
 
@@ -59,34 +75,62 @@ export default function Home() {
         <div className="w-full max-w-md mx-auto">
           <form className="bg-gray-700 text-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
             <h2 className="mb-4 text-3xl font-bold text-left">Sign In</h2>
-            <p className="text-gray-400 mb-6 text-left">Sign in to your account to continue</p>
+            <p className="text-gray-400 mb-6 text-left">
+              Sign in to your account to continue
+            </p>
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="email">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="email"
+              >
                 Email
               </label>
-              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500" id="email" type="email" placeholder="Email" />
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500"
+                id="email"
+                type="email"
+                placeholder="Email"
+              />
             </div>
             <div className="mb-4">
-              <label className="block text-white text-sm font-bold mb-2" htmlFor="password">
+              <label
+                className="block text-white text-sm font-bold mb-2"
+                htmlFor="password"
+              >
                 Password
               </label>
-              <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500" id="password" type="password" placeholder="******************" />
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500"
+                id="password"
+                type="password"
+                placeholder="******************"
+              />
             </div>
             <div className="mb-4">
               <div id="captcha" ref={captchaRef} />
             </div>
             <div className="mb-6">
-              <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="button" onClick={handleFormSubmit}>
+              <button
+                className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                type="button"
+                onClick={handleFormSubmit}
+              >
                 Sign In
               </button>
             </div>
             <div className="text-center">
-              <a className="inline-block align-baseline font-bold text-sm text-gray-400 hover:text-gray-300" href="#">
+              <a
+                className="inline-block align-baseline font-bold text-sm text-gray-400 hover:text-gray-300"
+                href="#"
+              >
                 Forgot Password?
               </a>
               <p className="text-gray-400 mt-4">
                 Not registered?
-                <a className="text-blue-500 hover:text-blue-600 mx-1" href="#">
+                <a
+                  className="text-blue-500 hover:text-blue-600 mx-1"
+                  href="#"
+                >
                   Create an account
                 </a>
               </p>
