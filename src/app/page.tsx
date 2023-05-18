@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const captchaRef = useRef(null);
 
   useEffect(() => {
@@ -36,6 +36,21 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const storedMode = localStorage.getItem('darkMode');
+    if (storedMode) {
+      setDarkMode(storedMode === 'true');
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('darkMode', String(darkMode));
+    document.documentElement.setAttribute(
+      'data-theme',
+      darkMode ? 'dark' : 'light'
+    );
+  }, [darkMode]);
+
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-800 text-white">
@@ -45,11 +60,7 @@ export default function Home() {
   }
 
   return (
-    <div
-      className={`flex flex-col min-h-screen ${
-        darkMode ? 'bg-gray-900' : 'bg-gray-800'
-      } text-white sm:flex-row transition-all duration-500`}
-    >
+    <div className={`flex flex-col min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-blue-500'} text-white sm:flex-row transition-all duration-500`}>
       {/* Dark mode toggle icon */}
       <div className="absolute top-0 right-0 m-4">
         <button
@@ -65,28 +76,44 @@ export default function Home() {
       </div>
 
       {/* Left side */}
-      <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-6 sm:p-12 bg-gray-900">
+      <div className={`flex flex-col items-center justify-center w-full sm:w-1/2 p-6 sm:p-12 ${darkMode ? 'bg-gray-900' : 'bg-blue-500'}`}>
         {/* Left side content */}
       </div>
 
       {/* Right side */}
-      <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-4 sm:p-8 bg-gray-800">
+      <div className={`flex flex-col items-center justify-center w-full sm:w-1/2 p-4 sm:p-8 ${darkMode ? 'bg-gray-800' : 'bg-white'}`}>
         {/* Right side content */}
         <div className="w-full max-w-md mx-auto">
-          <form className="bg-gray-700 text-white shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4">
-            <h2 className="mb-4 text-3xl font-bold text-left">Sign In</h2>
-            <p className="text-gray-400 mb-6 text-left">
+          <form
+            className={`${
+              darkMode ? 'bg-gray-700' : ''
+            } shadow-lg rounded-lg px-8 pt-6 pb-8 mb-4 ${darkMode ? 'text-white' : 'text-gray-800'}`}
+          >
+            <h2 className="mb-4 text-3xl font-bold text-left">
+              Sign In
+            </h2>
+            <p
+              className={`text-gray-400 mb-6 text-left ${
+                darkMode ? 'text-gray-400' : 'text-gray-600'
+              }`}
+            >
               Sign in to your account to continue
             </p>
             <div className="mb-4">
               <label
-                className="block text-white text-sm font-bold mb-2"
+                className={`block text-sm font-bold mb-2 ${
+                  darkMode ? 'text-white' : 'text-gray-800'
+                }`}
                 htmlFor="email"
               >
                 Email
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500"
+                className={`${
+                  darkMode
+                    ? 'bg-gray-600 border-gray-500 text-gray-300'
+                    : 'bg-white border-gray-400 text-gray-800'
+                } shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="email"
                 type="email"
                 placeholder="Email"
@@ -94,13 +121,19 @@ export default function Home() {
             </div>
             <div className="mb-4">
               <label
-                className="block text-white text-sm font-bold mb-2"
+                className={`block text-sm font-bold mb-2 ${
+                  darkMode ? 'text-white' : 'text-gray-800'
+                }`}
                 htmlFor="password"
               >
                 Password
               </label>
               <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-300 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-gray-600 border-gray-500"
+                className={`${
+                  darkMode
+                    ? 'bg-gray-600 border-gray-500 text-gray-300'
+                    : 'bg-white border-gray-400 text-gray-800'
+                } shadow appearance-none border rounded w-full py-2 px-3 mb-3 leading-tight focus:outline-none focus:shadow-outline`}
                 id="password"
                 type="password"
                 placeholder="******************"
@@ -111,7 +144,9 @@ export default function Home() {
             </div>
             <div className="mb-6">
               <button
-                className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                className={`bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full ${
+                  darkMode ? 'hover:text-white' : 'hover:text-gray-800'
+                }`}
                 type="button"
                 onClick={handleFormSubmit}
               >
@@ -120,15 +155,21 @@ export default function Home() {
             </div>
             <div className="text-center">
               <a
-                className="inline-block align-baseline font-bold text-sm text-gray-400 hover:text-gray-300"
+                className={`inline-block align-baseline font-bold text-sm ${
+                  darkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-600 hover:text-gray-500'
+                }`}
                 href="#"
               >
                 Forgot Password?
               </a>
-              <p className="text-gray-400 mt-4">
+              <p className={`text-gray-400 mt-4 ${
+                  darkMode ? 'text-gray-400' : 'text-gray-600'
+                }`}>
                 Not registered?
                 <a
-                  className="text-blue-500 hover:text-blue-600 mx-1"
+                  className={`text-blue-500 hover:text-blue-600 mx-1 ${
+                  darkMode ? 'hover:text-white' : 'hover:text-gray-800'
+                }`}
                   href="#"
                 >
                   Create an account
