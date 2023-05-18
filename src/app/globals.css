@@ -25,3 +25,9 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.tattoo-text {
+  font-family: 'Pacifico', cursive;
+  color: #ff6961;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}

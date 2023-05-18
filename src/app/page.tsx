@@ -5,21 +5,22 @@ export default function Home() {
     <div className="flex flex-col min-h-screen bg-gray-900 text-white sm:flex-row">
       {/* Left side */}
       <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-8 sm:p-24">
-        <h1 className="text-4xl font-bold mb-8">Login</h1>
-        {/* Add your login form here */}
+        <h1 className="text-4xl mb-8">
+          <span className="tattoo-text">Strucken</span> Proxies
+        </h1>
+        <Image
+          src="/next.svg"
+          alt="Character holding lightning"
+          width={300}
+          height={300}
+          priority
+        />
       </div>
 
       {/* Right side */}
       <div className="flex flex-col items-center justify-center w-full sm:w-1/2 p-8 sm:p-24 bg-gray-800">
-        <Image
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
         <div className="mt-12 bg-gray-700 p-6 rounded">
-          <form className="w-full max-w-sm">
+          <form className="max-w-md">
             <div className="mb-4">
               <label htmlFor="email" className="block mb-2">
                 Email:
@@ -27,7 +28,7 @@ export default function Home() {
               <input
                 type="email"
                 id="email"
-                className="w-full p-2 border border-gray-400 rounded focus:outline-none focus:border-gray-300"
+                className="w-full px-3 py-2 border border-gray-400 rounded focus:outline-none focus:border-gray-300 text-gray-900"
                 placeholder="Enter your email"
               />
             </div>
@@ -38,7 +39,7 @@ export default function Home() {
               <input
                 type="password"
                 id="password"
-                className="w-full p-2 border border-gray-400 rounded focus:outline-none focus:border-gray-300"
+                className="w-full px-3 py-2 border border-gray-400 rounded focus:outline-none focus:border-gray-300 text-gray-900"
                 placeholder="Enter your password"
               />
             </div>
